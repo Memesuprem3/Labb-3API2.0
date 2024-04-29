@@ -1,7 +1,9 @@
 
 using Labb_3API2._0.Data;
 using Labb_3API2._0.Models;
+using Labb_3API2._0.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Labb_3API2._0
 {
@@ -13,17 +15,16 @@ namespace Labb_3API2._0
 
             // Add services to the container.
 
+
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var app = builder.Build();
-
-
-            //builder.Services.AddScoped<IPerson, PersonRepository>();
-            //builder.Services.AddScoped<IInterest, InterestRepository>();
-            //builder.Services.AddScoped<ILink, LinkRepository>();
+            builder.Services.AddScoped<IPerson, PersonRepository>();
+            builder.Services.AddScoped<IInterest, InterestRepository>();
+            builder.Services.AddScoped<ILink, LinkRepository>();
 
             //Ef till sql
             builder.Services.AddControllers().AddJsonOptions(options =>
@@ -35,6 +36,7 @@ namespace Labb_3API2._0
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
 
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

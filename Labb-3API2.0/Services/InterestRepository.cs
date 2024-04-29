@@ -4,8 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Labb_3API2._0.Services
 {
-    public class InterestRepository : IInterest
-    {
+   
         public class InterestRepository : IInterest
         {
             private AppDbContext _appDbContext;
@@ -20,5 +19,5 @@ namespace Labb_3API2._0.Services
                 return await _appDbContext.Interests.ToListAsync();
             }
         }
-    }
+    
 }
